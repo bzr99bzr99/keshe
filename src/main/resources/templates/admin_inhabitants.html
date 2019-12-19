@@ -92,19 +92,17 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous" onclick="previous()">
+                    <a th:href="@{/admin/topage(topage=${session.nowpage-1})}" aria-label="Previous" onclick="previous()">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li th:if="${pagenum >= 1}"><a href="#">1</a></li>
-                <li th:if="${pagenum >= 2}"><a href="#">2</a></li>
-                <li th:if="${pagenum >= 3}"><a href="#">3</a></li>
-                <li th:if="${pagenum >= 4}"><a href="#">4</a></li>
-                <li th:if="${pagenum >= 5}"><a href="#">5</a></li>
+                <li th:if="${session.pagenum >= 1}"><a th:href="@{/admin/topage?topage=1}">1</a></li>
+                <li th:if="${session.pagenum >= 2}"><a th:href="@{/admin/topage?topage=2}">2</a></li>
+                <li th:if="${session.pagenum >= 3}"><a th:href="@{/admin/topage?topage=3}">3</a></li>
+                <li th:if="${session.pagenum >= 4}"><a th:href="@{/admin/topage?topage=4}">4</a></li>
+                <li th:if="${session.pagenum >= 5}"><a th:href="@{/admin/topage?topage=5}">5</a></li>
                 <li>
-                    <a href="#" aria-label="Next" onclick="next()">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
+                    <a th:href="@{/admin/topage(topage=${session.nowpage+1})}" aria-label=" Next" onclick="next()"><span aria-hidden="true">&raquo;</span></a>
                 </li>
             </ul>
         </nav>

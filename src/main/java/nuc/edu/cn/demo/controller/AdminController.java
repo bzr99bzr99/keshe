@@ -30,13 +30,13 @@ public class AdminController {
         List<Inhabitant> lists = adminService.getInhabitants();
         List<Inhabitant> list = new ArrayList<>();
         for (int i = 0; i < lists.size(); i++) {
-            if (i <= 14) {
+            if (i < 10) {
                 list.add(lists.get(i));
             }
         }
         session.setAttribute("nowpage", 1);
         model.addAttribute("inhabitants", list);
-        model.addAttribute("pagenum", lists.size() / 15 + 1);
+        session.setAttribute("pagenum", lists.size() / 10 + 1);
         return "admin_inhabitants";
     }
 
@@ -44,7 +44,30 @@ public class AdminController {
     @RequestMapping("/toupdate")
     public String toupdate(int id, Model model) {
         adminService.getInhabitant(id);
-        model.addAttribute("user",adminService.getInhabitant(id));
+        model.addAttribute("user", adminService.getInhabitant(id));
         return "admin_inhabitant_update";
     }
+
+    //页面跳转
+    @RequestMapping("/topage")
+    public String topage(int topage, HttpSession session, Model model) {
+        int pagenum = (int)session.getAttribute("pagenum");
+        if (topage < 1) {
+            topage = 1;
+        }
+        if(topage > pagenum){
+            topage = pagenum;
+        }
+        List<Inhabitant> lists = adminService.getInhabitants();
+        List<Inhabitant> list = new ArrayList<>();
+        for (int i = (topage - 1) * 10; i < lists.size(); i++) {
+            if (i < topage * 10) {
+                list.add(lists.get(i));
+            }
+        }
+        session.setAttribute("nowpage", topage);
+        model.addAttribute("inhabitants", list);
+        return "admin_inhabitants";
+    }
+
 }
