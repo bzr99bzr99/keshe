@@ -21,6 +21,7 @@ public class InhabitantController {
 
     /**
      * 返回到主页
+     *
      * @return
      */
     @RequestMapping("/toindex")
@@ -203,4 +204,11 @@ public class InhabitantController {
     public int insertInhabitant(Inhabitant inhabitant) {
         return inhabitantService.insertInhabitant(inhabitant);
     }
+
+    @RequestMapping("selectone")
+    public String selectone(String query,Model model) {
+        model.addAttribute("inhabitants",inhabitantService.likeInhabitantByName(query));
+        return "admin_inhabitants";
+    }
+
 }

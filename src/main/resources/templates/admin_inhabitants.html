@@ -48,7 +48,10 @@
             <div class="panel-heading">住户信息</div>
             <div class="panel-body">
                 <div class="form-group">
-                    <input type="text" placeholder="请输入查询住户的姓名" class="form-control" id="query" onkeyup="a1()">
+                    <form class="form-inline text-center" action="/inhabitant/selectone" method="post">
+                        <input type="text" placeholder="请输入查询住户的姓名" class="form-control" id="query" name="query">
+                        <button type="submit" class="btn btn-primary">查询</button>
+                    </form>
                 </div>
             </div>
             <!-- Table -->
