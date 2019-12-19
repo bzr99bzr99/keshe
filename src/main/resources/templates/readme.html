@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}">
+    <script>
+        function a1() {
+            var id = $('#user_id').val();
+            var sex = $('#sex').val();
+            var name = $('#name').val();
+            var age = $('#age').val();
+            var phone = $('#phone').val();
+            var unit = $('#unit').val();
+            var doorplate = $('#doorplate').val();
+            var password = $('#password').val();
+            var remark = $('#remark').val();
+            $.ajax({
+                url:"/inhabitant/updateinhabitant",
+                type:"post",
+                data:{id:id,sex:sex,name:name,age:age,phone:phone,unit:unit,doorplate:doorplate,password:password,remark:remark},
+                success:function (data) {
+                    console.log(data);
+                    if (data==1){
+                        alert("修改成功！");
+                    }else {
+                        alert("修改失败！")
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-2">
+                <a class="navbar-brand"><img style="width: 20px;height: 20px;" th:src="@{/image/1.jpeg}"/></a>
+                <a class="navbar-brand" th:href="@{/inhabitant/toindex}">社区首页</a>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/inhabitant/inhabitants}">住户信息</a></li>
+                    <li><a th:href="@{money.html}">缴费信息 <span class="badge">4</span></a></li>
+                    <li><a href="#">投诉信息 <span class="badge">4</span></a></li>
+                </ul>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/inhabitant/mymsg}"><span
+                            class="glyphicon glyphicon-user"></span><span th:text="${session.attribute}">用户</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <form action="/inhabitant/updateinhabitant" method="post">
+        <input type="text" class="sr-only" th:value="${user.id}" name="id" id="user_id">
+        <div>
+            <label for="name">姓名:</label>
+            <input type="text" class="form-control" id="name" th:value="${user.name}" name="name">
+        </div>
+        <br>
+        <div>
+            <label for="sex">性别:</label>
+            <input type="text" class="form-control" id="sex" th:value="${user.sex}" name="sex">
+        </div>
+        <br>
+        <div>
+            <label for="age">年龄:</label>
+            <input type="text" class="form-control" id="age" th:value="${user.age}" name="age">
+        </div>
+        <br>
+        <div>
+            <label for="phone">电话:</label>
+            <input type="text" class="form-control" id="phone" th:value="${user.phone}" name="phone">
+        </div>
+        <br>
+        <div>
+            <label for="indate">入住时间:</label>
+            <input type="date" class="form-control" id="indate" th:value="${#dates.format(user.indate,'yyyy-MM-dd')}" name="indate" disabled>
+        </div>
+        <br>
+        <div>
+            <label for="unit">单元号:</label>
+            <input type="text" class="form-control" id="unit" th:value="${user.unit}" name="unit">
+        </div>
+        <br>
+        <div>
+            <label for="doorplate">门牌号:</label>
+            <input type="text" class="form-control" id="doorplate" th:value="${user.doorplate}" name="doorplate">
+        </div>
+        <br>
+        <div>
+            <label for="password">密码:</label>
+            <input type="text" class="form-control" id="password" th:value="${user.password}" name="password">
+        </div>
+        <br>
+        <div>
+            <label for="remark">备注:</label>
+            <textarea id="remark" class="form-control" th:text="${user.remark}" name="remark"></textarea>
+        </div>
+        <br>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" onclick="a1()">修改</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

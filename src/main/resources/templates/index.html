@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.css}">
+    <script type="text/javascript">
+        function a1() {
+            var id = $("#id").val();
+            var pwd = $("#pwd").val();
+            var attribute = $("input[name='attribute']:checked").val();
+            $.ajax({
+                url: "/login/loginAjax",
+                type: "post",
+                data: {id: id, password: pwd,attribute:attribute},
+                success: function (data) {
+                    console.log(data);
+                    if (data.num == 0) {
+                        $("#lform").submit();
+                    } else {
+                        if (data.idError == "yes") {
+                            $("#div-id").removeClass("has-success")
+                            $("#div-id").addClass("has-error");
+                            $("#help-id").removeClass("sr-only");
+                            $("#help-id").removeClass("glyphicon-ok");
+                            $("#help-id").addClass("glyphicon-remove");
+                            $("#id-re").html("账号错误");
+                            $("#id-re").css("color", "red");
+                        } else {
+                            $("#div-id").removeClass("has-error");
+                            $("#div-id").addClass("has-success");
+                            $("#help-id").removeClass("sr-only");
+                            $("#help-id").removeClass("glyphicon-remove");
+                            $("#help-id").addClass("glyphicon-ok");
+                            $("#id-re").html("账号正确");
+                            $("#id-re").css("color", "green");
+                        }
+                        if (data.pwdError == "yes") {
+                            $("#div-pwd").removeClass("has-success");
+                            $("#div-pwd").addClass("has-error");
+                            $("#help-pwd").removeClass("sr-only");
+                            $("#help-pwd").removeClass("glyphicon-ok");
+                            $("#help-pwd").addClass("glyphicon-remove");
+                            $("#pwd-re").html("密码错误");
+                            $("#pwd-re").css("color", "red");
+                        } else {
+                            $("#div-pwd").removeClass("has-error");
+                            $("#div-pwd").addClass("has-success");
+                            $("#help-pwd").removeClass("sr-only");
+                            $("#help-pwd").removeClass("glyphicon-remove");
+                            $("#help-pwd").addClass("glyphicon-ok");
+                            $("#pwd-re").html("密码正确");
+                            $("#pwd-re").css("color", "green");
+                        }
+                        return false;
+                    }
+                }
+            });
+            return true;
+        }
+    </script>
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="text-center text-success">中北物业管理系统</h1>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="text-center">
+        <form id="lform" method="post" action="/login/loginsuccess">
+            <div class="form-group form-inline">
+                <div id="div-id" class="input-group has-feedback">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span>账号 </span>
+                    <input class="form-control" type="text" id="id" placeholder="请输入账号" name="id">
+                    <span id="help-id" class="glyphicon form-control-feedback sr-only" aria-hidden="true"></span>
+                </div>
+                <span id="id-re"></span>
+            </div>
+            <div class="form-group form-inline">
+                <div id="div-pwd" class="input-group has-feedback">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span>密码 </span>
+                    <input class="form-control" type="password" id="pwd" placeholder="请输入密码"/>
+                    <span id="help-pwd" class="glyphicon form-control-feedback sr-only" aria-hidden="true"></span>
+                </div>
+                <span id="pwd-re"></span>
+            </div>
+            <div class="form-group">
+                <label>身份：</label>
+                <input type="radio" name="attribute" value="0">住户&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="attribute" value="1">管理员
+            </div>
+            <div class="form-group">
+                <button id="button" class="btn btn-default" type="button" onclick="a1()">登录</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

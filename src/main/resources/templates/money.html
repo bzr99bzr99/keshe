@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>缴费页面</title>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.css}">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-2">
+                <a class="navbar-brand"><img alt="Brand" style="width:20px ;height: 20px" src="image/1.jpeg"></a>
+                <a class="navbar-brand" th:href="@{/inhabitant/toindex}">社区首页</a>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li><a href="custom.html">住户信息</a></li>
+                    <li  class="active"><a href="#">缴费信息 <span class="badge">4</span></a></li>
+                    <li><a href="#">投诉信息 <span class="badge">4</span></a></li>
+                </ul>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="@{/inhabitant/mymsg}"><span class="glyphicon glyphicon-user"></span>用户</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">保护费</h3>
+        </div>
+        <div class="panel-body">
+            请及时缴费
+        </div>
+        <table class="table">
+            <th>产品</th>
+            <th>价格</th>
+            <tr>
+                <td>产品 A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>产品 B</td>
+                <td>400</td>
+            </tr>
+        </table>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">面板标题</div>
+        <table class="table">
+            <th>产品</th>
+            <th>价格</th>
+            <tr>
+                <td>产品 A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>产品 B</td>
+                <td>400</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <footer>Copyright © 2013-2019 菜鸟教程  runoob.com All Rights Reserved. 备案号：闽ICP备15012807号-1</footer>
+</div>
+</body>
+</html>

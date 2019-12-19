@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-2">
+                <a class="navbar-brand"><img alt="Brand" style="width:20px ;height: 20px" th:src="@{/image/1.jpeg}"></a>
+                <a class="navbar-brand" href="#">社区首页</a>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/inhabitant/inhabitants}">住户信息</a></li>
+                    <li><a href="money.html">缴费信息 <span class="badge">4</span></a></li>
+                    <li><a href="#">投诉信息 <span class="badge">4</span></a></li>
+                </ul>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="@{/inhabitant/mymsg}"><span class="glyphicon glyphicon-user"></span><span th:text="${session.attribute}">用户</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        请及时缴费。
+    </div>
+    <div class="jumbotron text-center">
+        <h1>欢迎登陆中北社区物业管理系统！</h1>
+        <p>这是一个超大屏幕（Jumbotron）的实例。</p>
+        <p><a class="btn btn-primary btn-lg" role="button">
+            学习更多</a>
+        </p>
+    </div>
+    <div style="width: 1200px;height: 300px"></div>
+</div>
+<div class="modal-footer">
+    <footer class="text-center">Copyright © 2017-2019 毕朝冉   All Rights Reserved. </footer>
+</div>
+</body>
+</html>

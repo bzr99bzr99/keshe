@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员界面</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}">
+    <style>
+        .table tbody tr td {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-2">
+                <a class="navbar-brand"><img style="width: 20px;height: 20px;" th:src="@{/image/1.jpeg}"/></a>
+                <a class="navbar-brand" th:href="@{/inhabitant/toindex}">社区首页</a>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">住户管理</a></li>
+                    <li><a th:href="@{money.html}">缴费单管理 <span class="badge">4</span></a></li>
+                    <li><a href="#">业主缴费管理 <span class="badge">4</span></a></li>
+                </ul>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a th:href="@{/inhabitant/mymsg}"><span class="glyphicon glyphicon-user"></span><span
+                            th:text="${session.attribute}">用户</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div>
+    <div class="container">
+        <div class="panel panel-default" style="height: 700px">
+            <!-- Default panel contents -->
+            <div class="panel-heading">住户信息</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" placeholder="请输入查询住户的姓名" class="form-control" id="query" onkeyup="a1()">
+                </div>
+            </div>
+            <!-- Table -->
+            <table class="table table-hover table-striped" id="table">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>年龄</td>
+                    <td>手机号</td>
+                    <td>入住时间</td>
+                    <td>单元</td>
+                    <td>门牌编号</td>
+                    <td>备注</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="inhabitant:${inhabitants}">
+                    <td th:text="${inhabitantStat.index+1}">1</td>
+                    <td th:text="${inhabitant.name}">比朝冉</td>
+                    <td th:text="${inhabitant.sex}">男</td>
+                    <td th:text="${inhabitant.age}">21</td>
+                    <td th:text="${inhabitant.phone}">15383464036</td>
+                    <td th:text="${#dates.format(inhabitant.indate,'yyyy-MM-dd')}">1999-01-04</td>
+                    <td th:text="${inhabitant.unit}">6</td>
+                    <td th:text="${inhabitant.doorplate}">521</td>
+                    <td th:text="${inhabitant.remark}">单身</td>
+                    <td>
+                        <a th:href="@{/admin/toupdate(id=${inhabitant.id})}">
+                            <button type="button" class="btn btn-info">修改</button>
+                        </a>&nbsp;<button type="button" class="btn btn-danger">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous" onclick="previous()">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:if="${pagenum >= 1}"><a href="#">1</a></li>
+                <li th:if="${pagenum >= 2}"><a href="#">2</a></li>
+                <li th:if="${pagenum >= 3}"><a href="#">3</a></li>
+                <li th:if="${pagenum >= 4}"><a href="#">4</a></li>
+                <li th:if="${pagenum >= 5}"><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next" onclick="next()">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

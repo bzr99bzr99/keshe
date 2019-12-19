@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nuc.edu.cn.demo.mapper.InhabitantMapper">
+    <select id="select" parameterType="Integer" resultType="nuc.edu.cn.demo.pojo.Inhabitant">
+        SELECT * FROM inhabitant WHERE id=#{id}
+    </select>
+    <select id="selectall" resultType="nuc.edu.cn.demo.pojo.Inhabitant">
+        SELECT * FROM inhabitant
+    </select>
+    <select id="likeInhabitantByName" parameterType="String" resultType="nuc.edu.cn.demo.pojo.Inhabitant">
+        SELECT * FROM inhabitant WHERE name LIKE '%${name}%'
+    </select>
+    <update id="updateInhabitant" parameterType="nuc.edu.cn.demo.pojo.Inhabitant">
+        UPDATE inhabitant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="age!=null">age=#{age},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="indate!=null">indate=#{indate}</if>
+            <if test="unit!=null">unit=#{unit},</if>
+            <if test="doorplate!=null">doorplate=#{doorplate},</if>
+            <if test="remark!=null">remark=#{remark},</if>
+            <if test="password!=null">password=#{password},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <insert id="insertInhabitant" parameterType="nuc.edu.cn.demo.pojo.Inhabitant">
+        INSERT INTO inhabitant(name, sex, age, phone, indate, unit, doorplate, remark, password) VALUES(#{name},#{sex},#{age},#{phone},#{indate},#{unit},#{doorplate},#{remark},#{password})
+    </insert>
+    <delete id="deleteInhabitant" parameterType="Integer">
+        DELETE  FROM inhabitant WHERE id=#{id}
+    </delete>
+</mapper>
