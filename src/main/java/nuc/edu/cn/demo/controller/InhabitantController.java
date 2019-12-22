@@ -174,9 +174,9 @@ public class InhabitantController {
      * @return
      */
     @RequestMapping("/deleteinhabitant")
-    @ResponseBody
-    public int deleteInhabitant(int id) {
-        return inhabitantService.deleteInhabitant(id);
+    public String deleteInhabitant(int id) {
+        inhabitantService.deleteInhabitant(id);
+        return "redirect:/admin/inhabitants";
     }
 
     /**

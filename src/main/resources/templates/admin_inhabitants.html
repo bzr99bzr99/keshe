@@ -16,6 +16,14 @@
             vertical-align: middle !important;
         }
     </style>
+    <script type="text/javascript">
+        function a1(id) {
+            var flag = confirm("确定删除该条信息？")
+            if(flag==true){
+                window.location.href="http://localhost:8080/inhabitant/deleteinhabitant?id="+id
+            }
+        }
+    </script>
 </head>
 <body>
 <div>
@@ -38,6 +46,9 @@
                         <a data-toggle="modal" data-target="#myModal">
                             <span class="glyphicon glyphicon-user"></span><span th:text="${session.attribute}">用户</span>
                         </a>
+                    </li>
+                    <li>
+                        <a><span class="glyphicon glyphicon-log-out">退出</span></a>
                     </li>
                 </ul>
             </div>
@@ -108,7 +119,8 @@
                     <td>
                         <a th:href="@{/admin/toupdate(id=${inhabitant.id})}">
                             <button type="button" class="btn btn-info">修改</button>
-                        </a>&nbsp;<button type="button" class="btn btn-danger">删除</button>
+                        </a>&nbsp;
+                        <button type="button" class="btn btn-danger" th:onclick="'javascript:a1('+${inhabitant.id}+');'">删除</button>
                     </td>
                 </tr>
                 </tbody>
@@ -119,7 +131,8 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
-                    <a th:href="@{/admin/topage(topage=${session.nowpage-1})}" aria-label="Previous" onclick="previous()">
+                    <a th:href="@{/admin/topage(topage=${session.nowpage-1})}" aria-label="Previous"
+                       onclick="previous()">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -129,7 +142,8 @@
                 <li th:if="${session.pagenum >= 4}"><a th:href="@{/admin/topage?topage=4}">4</a></li>
                 <li th:if="${session.pagenum >= 5}"><a th:href="@{/admin/topage?topage=5}">5</a></li>
                 <li>
-                    <a th:href="@{/admin/topage(topage=${session.nowpage+1})}" aria-label=" Next" onclick="next()"><span aria-hidden="true">&raquo;</span></a>
+                    <a th:href="@{/admin/topage(topage=${session.nowpage+1})}" aria-label=" Next" onclick="next()"><span
+                            aria-hidden="true">&raquo;</span></a>
                 </li>
             </ul>
         </nav>
