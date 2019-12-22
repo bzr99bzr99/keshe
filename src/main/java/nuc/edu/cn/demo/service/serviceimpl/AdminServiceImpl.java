@@ -2,6 +2,7 @@ package nuc.edu.cn.demo.service.serviceimpl;
 
 import nuc.edu.cn.demo.mapper.AdminMapper;
 import nuc.edu.cn.demo.mapper.InhabitantMapper;
+import nuc.edu.cn.demo.pojo.Admin;
 import nuc.edu.cn.demo.pojo.Inhabitant;
 import nuc.edu.cn.demo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Inhabitant getInhabitant(int id) {
         return inhabitantMapper.select(id);
+    }
+
+    @Override
+    public int update(Admin admin) {
+        return adminMapper.update(admin);
     }
 }

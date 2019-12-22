@@ -6,4 +6,7 @@
     <select id="select" parameterType="Integer" resultType="nuc.edu.cn.demo.pojo.Admin">
         SELECT * FROM admin WHERE id=#{id}
     </select>
+    <update id="update" parameterType="nuc.edu.cn.demo.pojo.Admin">
+        UPDATE admin SET password=#{password} WHERE id=#{id}
+    </update>
 </mapper>

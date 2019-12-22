@@ -47,6 +47,7 @@ public class LoginController {
     public ModelAndView loginsuccess(int id, String password, String attribute, ModelAndView model, HttpSession session) {
         if ("1".equals(attribute)) {
             session.setAttribute("attribute","管理员");//登陆状态
+            session.setAttribute("user",loginServie.selectAdmin(id));
             model.setViewName("admin_success");
         }
         if ("0".equals(attribute)){

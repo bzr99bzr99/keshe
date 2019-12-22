@@ -1,5 +1,6 @@
 package nuc.edu.cn.demo.controller;
 
+import nuc.edu.cn.demo.pojo.Admin;
 import nuc.edu.cn.demo.pojo.Inhabitant;
 import nuc.edu.cn.demo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,12 @@ public class AdminController {
         model.addAttribute("inhabitants", list);
         return "admin_inhabitants";
     }
-
+    /**
+     *ajax更改管理员信息
+     */
+    @RequestMapping("/update")
+    @ResponseBody
+    public int update(Admin admin){
+        return adminService.update(admin);
+    }
 }

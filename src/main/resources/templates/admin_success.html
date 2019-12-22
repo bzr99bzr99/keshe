@@ -11,6 +11,25 @@
     <script th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}">
+    <script type="text/javascript">
+        function a1() {
+            var name = $("#name").val();
+            var password = $("#password").val();
+            $.ajax({
+                url: "/admin/update",
+                type: "post",
+                data: {id: name, password: password},
+                success: function (data) {
+                    if (data == 1) {
+                        alert("修改成功！");
+                    }
+                    if (data == 0) {
+                        alert("修改失败！")
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 <div>
@@ -29,12 +48,36 @@
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/inhabitant/mymsg}"><span class="glyphicon glyphicon-user"></span><span
-                            th:text="${session.attribute}">用户</span></a></li>
+                    <li>
+                        <a data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-user"></span><span th:text="${session.attribute}">用户</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">我的信息</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="name" class="sr-only" th:value="${session.user.id}">
+                <label>账号：</label>
+                <input type="text" class="form-control" th:value="${session.user.id}" disabled>
+                <label>密码：</label>
+                <input type="text" id="password" class="form-control" th:value="${session.user.password}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="a1()">修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
 <div class="container">
     <div class="alert alert-warning">

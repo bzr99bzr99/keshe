@@ -77,5 +77,10 @@ public class LoginServieImpl implements LoginServie {
         return inhabitantMapper.select(id);
     }
 
+    @Override
+    public Admin selectAdmin(int id) {
+        return adminMapper.select(id);
+    }
+
 
 }
