@@ -55,6 +55,7 @@ public class LoginController {
             session.setAttribute("attribute","住户");
             //住户id
             session.setAttribute("id",loginServie.selectInhabitant(id).getId());
+            session.setAttribute("user",loginServie.selectInhabitant(id));
             model.setViewName("login_success");
         }
         return model;

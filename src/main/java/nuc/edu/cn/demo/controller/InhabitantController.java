@@ -156,20 +156,6 @@ public class InhabitantController {
     }
 
     /**
-     * 查看自己的信息
-     *
-     * @param session 获取当前用户的id
-     * @param model
-     * @return
-     */
-    @RequestMapping("/mymsg")
-    public String mymsg(HttpSession session, Model model) {
-        int user_id = (int) session.getAttribute("id");
-        model.addAttribute("user", inhabitantService.selectInhabitantById(user_id));
-        return "readme";
-    }
-
-    /**
      * ajax发送请求修改住户信息
      *
      * @param inhabitant
@@ -205,6 +191,12 @@ public class InhabitantController {
         return inhabitantService.insertInhabitant(inhabitant);
     }
 
+    /**
+     * 管理员查询一个住户信息
+     * @param query
+     * @param model
+     * @return
+     */
     @RequestMapping("selectone")
     public String selectone(String query,Model model) {
         model.addAttribute("inhabitants",inhabitantService.likeInhabitantByName(query));
