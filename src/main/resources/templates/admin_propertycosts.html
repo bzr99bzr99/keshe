@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>物业费管理</title>
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script th:src="@{js/jquery.js}"></script>
+    <script th:src="@{js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.css}">
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-2">
+                <a class="navbar-brand"><img style="width: 20px;height: 20px;" th:src="@{/image/1.jpeg}"/></a>
+                <a class="navbar-brand" th:href="@{/inhabitant/toindex}">社区首页</a>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">住户管理</a></li>
+                    <li><a th:href="@{money.html}">缴费单管理</a></li>
+                    <li><a href="#">业主缴费管理</a></li>
+                </ul>
+            </div>
+            <div class="">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-user"></span><span th:text="${session.attribute}">用户</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login/exit}"><span class="glyphicon glyphicon-log-out">退出</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">我的信息</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="name" class="sr-only" th:value="${session.user.id}">
+                <label>账号：</label>
+                <input type="text" class="form-control" th:value="${session.user.id}" disabled>
+                <label>密码：</label>
+                <input type="text" id="password" class="form-control" th:value="${session.user.password}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="a1()">修改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div class="container">
+    <div class="text-right">
+        <a data-toggle="modal" data-target="#myModal2">
+            <button type="button" class="btn btn-info">添加缴费单</button>
+        </a>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="insert" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="insert">添加缴费单</h4>
+                </div>
+                <form action="/propertyfee/insert" method="post">
+                    <div class="modal-body">
+                        <label>缴费单名称：</label>
+                        <input type="text" class="form-control" name="name">
+                        <label>缴费单描述：</label>
+                        <textarea class="form-control" placeholder="请输入缴费单描述" name="describe"></textarea>
+                        <label>起始时间：</label>
+                        <input type="date" class="form-control" name="begindate">
+                        <label>截止时间：</label>
+                        <input type="date" class="form-control" name="enddate">
+                        <label>缴费金额：</label>
+                        <input type="text" class="form-control" name="cost">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <br>
+    <div th:each="p:${propertyfees}">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div><h3 class="panel-title" th:text="${p.name}">水电费</h3></div>
+            </div>
+            <div class="media">
+                <div class="media-top">
+                    <div class="col-md-2"><h3>费用信息:</h3><h4 class="text-danger" th:text="${'￥'+#numbers.formatDecimal(p.cost,1,'COMMA',2,'POINT')}">$1100</h4></div>
+                    <div class="col-md-10 text-right">
+                        <a data-toggle="modal" th:data-target="'#Modal'+${p.id}">
+                            <button type="button" class="btn btn-info">修改缴费单信息</button>
+                        </a>
+                        <button type="button" class="btn btn-warning btn-sm">业主缴费管理</button>
+                        <a th:href="@{/propertyfee/delete(id=${p.id})}"><button type="button" class="btn btn-danger btn-sm">删除缴费单</button></a>
+                    </div>
+                </div>
+                <div class="modal fade" th:id="'Modal'+${p.id}" tabindex="-1" role="dialog" th:aria-labelledby="${p.name}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" th:id="${p.name}">添加缴费单</h4>
+                            </div>
+                            <form action="/propertyfee/update" method="post">
+                                <div class="modal-body">
+                                    <input type="text" class="sr-only" name="id" th:value="${p.id}">
+                                    <label>缴费单名称：</label>
+                                    <input type="text" class="form-control" name="name" th:value="${p.name}">
+                                    <label>缴费单描述：</label>
+                                    <textarea class="form-control" placeholder="请输入缴费单描述" name="describe" th:text="${p.describe}"></textarea>
+                                    <label>起始时间：</label>
+                                    <input type="date" class="form-control" name="begindate" th:value="${#dates.format(p.begindate,'yyyy-MM-dd')}">
+                                    <label>截止时间：</label>
+                                    <input type="date" class="form-control" name="enddate" th:value="${#dates.format(p.enddate,'yyyy-MM-dd')}">
+                                    <label>缴费金额：</label>
+                                    <input type="text" class="form-control" name="cost" th:value="${p.cost}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary">修改</button>
+                                </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <div class="media-body">
+                    <h5 class="text-center" th:text="${p.describe}">
+                        这是一些示例文本。这是一些示例文本。这是一些示例文本。这是一些示例文本。这是一些示例文本。这是一些示例文本。这是一些示例文本。这是一些示例文本。</h5>
+                    <h4 class="text-center">
+                        <small><i>缴费起始时间:</i><i th:text="${#dates.format(p.begindate,'yyyy-MM-dd')}">1999-07-02</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>缴费截止时间:</i><i th:text="${#dates.format(p.enddate,'yyyy-MM-dd')}">2019-07-02</i></small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <footer>Copyright © 2013-2019 菜鸟教程 runoob.com All Rights Reserved. 备案号：闽ICP备15012807号-1</footer>
+</div>
+
+</body>
+</html>

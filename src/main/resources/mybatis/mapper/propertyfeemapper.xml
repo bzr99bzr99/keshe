@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nuc.edu.cn.demo.mapper.PropertyfeeMapper">
+    <select id="selects" resultType="nuc.edu.cn.demo.pojo.Propertyfee">
+        SELECT * FROM propertyfee
+    </select>
+    <select id="select" parameterType="Integer" resultType="nuc.edu.cn.demo.pojo.Propertyfee">
+        SELECT * FROM propertyfee WHERE id=#{id}
+    </select>
+    <insert id="insert" parameterType="nuc.edu.cn.demo.pojo.Propertyfee">
+        INSERT INTO propertyfee(name, propertyfee.describe, begindate, enddate, cost) VALUES (#{name},#{describe},#{begindate},#{enddate},#{cost})
+    </insert>
+    <update id="update" parameterType="nuc.edu.cn.demo.pojo.Propertyfee">
+        UPDATE propertyfee SET name=#{name},propertyfee.describe=#{describe},begindate=#{begindate},enddate=#{enddate},cost=#{cost} WHERE id=#{id}
+    </update>
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM propertyfee WHERE id=#{id}
+    </delete>
+</mapper>
