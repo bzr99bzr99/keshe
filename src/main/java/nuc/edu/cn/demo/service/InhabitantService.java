@@ -1,6 +1,7 @@
 package nuc.edu.cn.demo.service;
 
 import nuc.edu.cn.demo.pojo.Inhabitant;
+import nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface InhabitantService {
     public int updateInhabitant(Inhabitant inhabitant);
     public int deleteInhabitant(int id);
     public int insertInhabitant(Inhabitant inhabitant);
+    public InhabitantAndPropertyfee findById(int id);
 }

@@ -2,6 +2,7 @@ package nuc.edu.cn.demo.service.serviceimpl;
 
 import nuc.edu.cn.demo.mapper.InhabitantMapper;
 import nuc.edu.cn.demo.pojo.Inhabitant;
+import nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee;
 import nuc.edu.cn.demo.service.InhabitantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,15 @@ public class InhabitantServiceImpl implements InhabitantService {
     @Override
     public int insertInhabitant(Inhabitant inhabitant) {
         return inhabitantMapper.insertInhabitant(inhabitant);
+    }
+
+    /**
+     * 该id住户查询自己的缴费单
+     * @param id
+     * @return
+     */
+    @Override
+    public InhabitantAndPropertyfee findById(int id) {
+        return inhabitantMapper.findById(id);
     }
 }

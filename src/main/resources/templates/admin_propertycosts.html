@@ -18,13 +18,12 @@
         <div class="container-fluid">
             <div class="navbar-header col-md-2">
                 <a class="navbar-brand"><img style="width: 20px;height: 20px;" th:src="@{/image/1.jpeg}"/></a>
-                <a class="navbar-brand" th:href="@{/inhabitant/toindex}">社区首页</a>
+                <a class="navbar-brand"  th:href="@{/admin/toindex}">社区首页</a>
             </div>
             <div class="">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">住户管理</a></li>
-                    <li><a th:href="@{money.html}">缴费单管理</a></li>
-                    <li><a href="#">业主缴费管理</a></li>
+                    <li><a th:href="@{/admin/inhabitants}">住户管理</a></li>
+                    <li class="active"><a th:href="@{/propertyfee/selects}">缴费单管理</a></li>
                 </ul>
             </div>
             <div class="">
@@ -66,7 +65,7 @@
 <div class="container">
     <div class="text-right">
         <a data-toggle="modal" data-target="#myModal2">
-            <button type="button" class="btn btn-info">添加缴费单</button>
+            <button type="button" class="btn btn-info btn-sm">添加缴费单</button>
         </a>
     </div>
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="insert" aria-hidden="true">
@@ -108,9 +107,9 @@
                     <div class="col-md-2"><h3>费用信息:</h3><h4 class="text-danger" th:text="${'￥'+#numbers.formatDecimal(p.cost,1,'COMMA',2,'POINT')}">$1100</h4></div>
                     <div class="col-md-10 text-right">
                         <a data-toggle="modal" th:data-target="'#Modal'+${p.id}">
-                            <button type="button" class="btn btn-info">修改缴费单信息</button>
+                            <button type="button" class="btn btn-info btn-sm">修改缴费单信息</button>
                         </a>
-                        <button type="button" class="btn btn-warning btn-sm">业主缴费管理</button>
+                        <a th:href="@{/propertyfee/add(id=${p.id})}"><button type="button" class="btn btn-warning btn-sm">业主缴费管理</button></a>
                         <a th:href="@{/propertyfee/delete(id=${p.id})}"><button type="button" class="btn btn-danger btn-sm">删除缴费单</button></a>
                     </div>
                 </div>

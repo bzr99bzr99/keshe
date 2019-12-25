@@ -59,8 +59,7 @@
             <div class="">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{/inhabitant/inhabitants}">住户信息</a></li>
-                    <li><a href="money.html">缴费信息 <span class="badge">4</span></a></li>
-                    <li><a href="#">投诉信息 <span class="badge">4</span></a></li>
+                    <li><a th:href="@{/inhabitant/findById}">缴费信息 <span class="badge" th:text="${session.count}">4</span></a></li>
                 </ul>
             </div>
             <div class="">
@@ -105,12 +104,14 @@
                     <br>
                     <div>
                         <label for="phone">电话:</label>
-                        <input type="text" class="form-control" id="phone" th:value="${session.user.phone}" name="phone">
+                        <input type="text" class="form-control" id="phone" th:value="${session.user.phone}"
+                               name="phone">
                     </div>
                     <br>
                     <div>
                         <label for="indate">入住时间:</label>
-                        <input type="date" class="form-control" id="indate" th:value="${#dates.format(session.user.indate,'yyyy-MM-dd')}"
+                        <input type="date" class="form-control" id="indate"
+                               th:value="${#dates.format(session.user.indate,'yyyy-MM-dd')}"
                                name="indate" disabled>
                     </div>
                     <br>
@@ -121,17 +122,20 @@
                     <br>
                     <div>
                         <label for="doorplate">门牌号:</label>
-                        <input type="text" class="form-control" id="doorplate" th:value="${session.user.doorplate}" name="doorplate">
+                        <input type="text" class="form-control" id="doorplate" th:value="${session.user.doorplate}"
+                               name="doorplate">
                     </div>
                     <br>
                     <div>
                         <label for="password">密码:</label>
-                        <input type="text" class="form-control" id="password" th:value="${session.user.password}" name="password">
+                        <input type="text" class="form-control" id="password" th:value="${session.user.password}"
+                               name="password">
                     </div>
                     <br>
                     <div>
                         <label for="remark">备注:</label>
-                        <textarea id="remark" class="form-control" th:text="${session.user.remark}" name="remark"></textarea>
+                        <textarea id="remark" class="form-control" th:text="${session.user.remark}"
+                                  name="remark"></textarea>
                     </div>
                 </form>
             </div>
@@ -143,11 +147,13 @@
     </div><!-- /.modal -->
 </div>
 <div class="container">
-    <div class="alert alert-warning">
-        <a href="#" class="close" data-dismiss="alert">
-            &times;
-        </a>
-        请及时缴费。
+    <div th:each="warn:${session.warn}">
+        <div class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">
+                &times;
+            </a>
+            <span th:text="${warn.name + '未缴纳，请及时缴费'}">请及时缴费</span>
+        </div>
     </div>
     <div class="jumbotron text-center">
         <h1>欢迎登陆中北社区物业管理系统！</h1>
@@ -159,7 +165,7 @@
     <div style="width: 1200px;height: 300px"></div>
 </div>
 <div class="modal-footer">
-    <footer class="text-center">Copyright © 2017-2019 毕朝冉   All Rights Reserved. </footer>
+    <footer class="text-center">Copyright © 2017-2019 毕朝冉 All Rights Reserved.</footer>
 </div>
 </body>
 </html>

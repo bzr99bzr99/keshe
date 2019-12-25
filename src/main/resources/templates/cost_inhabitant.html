@@ -2,32 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/bootstrap.js"></script>
+    <title>业主缴费管理</title>
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}">
     <script type="text/javascript">
         function a1() {
-            var name = $("#name").val();
-            var password = $("#password").val();
-            $.ajax({
-                url: "/admin/update",
-                type: "post",
-                data: {id: name, password: password},
-                success: function (data) {
-                    if (data == 1) {
-                        alert("修改成功！");
-                    }
-                    if (data == 0) {
-                        alert("修改失败！")
-                    }
-                }
-            })
+            var flag = $("#checkall").prop("checked");
+            alert(flag);
+            if(flag==true){
+                $("#iframe").contents().find("input[name='checkbox']").prop("checked",true)
+            }else{
+                $("#iframe").contents().find("input[name='checkbox']").prop("checked",false);
+            }
         }
     </script>
 </head>
@@ -36,13 +28,13 @@
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header col-md-2">
-                <a class="navbar-brand"><img alt="Brand" style="width:20px ;height: 20px" th:src="@{/image/1.jpeg}"></a>
-                <a class="navbar-brand" href="#">社区首页</a>
+                <a class="navbar-brand"><img style="width: 20px;height: 20px;" th:src="@{/image/1.jpeg}"/></a>
+                <a class="navbar-brand"  th:href="@{/admin/toindex}">社区首页</a>
             </div>
             <div class="">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{/admin/inhabitants}">住户管理</a></li>
-                    <li><a th:href="@{/propertyfee/selects}">缴费单管理</a></li>
+                    <li class="active"><a th:href="@{/propertyfee/selects}">缴费单管理</a></li>
                 </ul>
             </div>
             <div class="">
@@ -82,17 +74,11 @@
     </div><!-- /.modal -->
 </div>
 <div class="container">
-    <div class="jumbotron text-center">
-        <h1>欢迎登陆中北社区物业管理系统！</h1>
-        <p>这是一个超大屏幕（Jumbotron）的实例。</p>
-        <p><a class="btn btn-primary btn-lg" role="button">
-            学习更多</a>
-        </p>
+    <div>
+        <div class="text-left col-md-6"><input type="checkbox" id="checkall" onclick="a1()">全选</div>
+        <div class="text-right col-md-6"><button type="button" class="btn btn-primary btn-sm">修改</button></div>
     </div>
-    <div style="width: 1200px;height: 300px"></div>
-</div>
-<div class="modal-footer">
-    <footer class="text-center">Copyright © 2017-2019 毕朝冉 All Rights Reserved.</footer>
+    <iframe th:src="@{/propertyfee/selectinhabitants(id=${propertyfee_id})}" width="1150" height="700" id="iframe"></iframe>
 </div>
 </body>
 </html>

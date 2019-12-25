@@ -32,4 +32,19 @@
     <delete id="deleteInhabitant" parameterType="Integer">
         DELETE  FROM inhabitant WHERE id=#{id}
     </delete>
+    <resultMap id="one" type="nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee">
+        <id column="inhabitantId" property="inhabitantId"></id>
+        <result column="inhabitantName" property="inhabitantName"></result>
+        <collection property="propertyfees" ofType="nuc.edu.cn.demo.pojo.Propertyfee">
+            <id column="propertyfeeId" property="id"></id>
+            <result column="propertyfeeName" property="name"></result>
+            <result column="describe" property="describe"></result>
+            <result column="begindate" property="begindate"/>
+            <result column="enddate" property="enddate"/>
+            <result column="cost" property="cost"/>
+        </collection>
+    </resultMap>
+    <select id="findById" parameterType="Integer" resultMap="one">
+       SELECT inhabitant.id inhabitantId,inhabitant.name inhabitantName,propertyfee.id propertyfeeId,propertyfee.name propertyfeeName,propertyfee.describe,propertyfee.begindate,propertyfee.enddate,propertyfee.cost FROM inhabitant,propertyfee,cost WHERE inhabitant.id=cost.inhabitant_id AND cost.propertyfee_id=propertyfee.id AND inhabitant.id=#{id}
+    </select>
 </mapper>

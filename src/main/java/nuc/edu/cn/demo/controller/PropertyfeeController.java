@@ -18,12 +18,13 @@ public class PropertyfeeController {
 
     /**
      * 查询所有的物业单信息并返回至物业表管理页面
+     *
      * @param model
      * @return
      */
     @RequestMapping("/selects")
     public String selects(Model model) {
-        model.addAttribute("propertyfees",propertyfeeService.selects());
+        model.addAttribute("propertyfees", propertyfeeService.selects());
         return "admin_propertycosts";
     }
 
@@ -49,5 +50,25 @@ public class PropertyfeeController {
     public String insert(Propertyfee propertyfee) {
         propertyfeeService.insert(propertyfee);
         return "redirect:selects";
+    }
+
+    @RequestMapping("/add")
+    public String add(int id, Model model) {
+        model.addAttribute("propertyfee_id", id);
+        return "cost_inhabitant";
+    }
+
+    /**
+     * 物业费需缴人员添加
+     * 先查询该物业表待缴费人员信息
+     * 查询全部人员信息
+     * 待缴人员与全部人员信息比较改变flag信息  1是待缴 0是无关
+     * 返回全部信息
+     */
+    @RequestMapping("/selectinhabitants")
+    public String selects(int id, Model model) {
+        //物业表服务处理数据
+        model.addAttribute("inhabitants",propertyfeeService.flagInhabitant(id));
+        return "inhabitant_inform";
     }
 }

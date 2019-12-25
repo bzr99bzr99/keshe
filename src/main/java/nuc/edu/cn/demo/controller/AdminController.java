@@ -52,11 +52,11 @@ public class AdminController {
     //页面跳转
     @RequestMapping("/topage")
     public String topage(int topage, HttpSession session, Model model) {
-        int pagenum = (int)session.getAttribute("pagenum");
+        int pagenum = (int) session.getAttribute("pagenum");
         if (topage < 1) {
             topage = 1;
         }
-        if(topage > pagenum){
+        if (topage > pagenum) {
             topage = pagenum;
         }
         List<Inhabitant> lists = adminService.getInhabitants();
@@ -70,12 +70,18 @@ public class AdminController {
         model.addAttribute("inhabitants", list);
         return "admin_inhabitants";
     }
+
     /**
-     *ajax更改管理员信息
+     * ajax更改管理员信息
      */
     @RequestMapping("/update")
     @ResponseBody
-    public int update(Admin admin){
+    public int update(Admin admin) {
         return adminService.update(admin);
+    }
+
+    @RequestMapping("/toindex")
+    public String toindex() {
+        return "admin_success";
     }
 }

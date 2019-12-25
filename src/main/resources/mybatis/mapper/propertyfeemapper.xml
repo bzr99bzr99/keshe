@@ -18,4 +18,10 @@
     <delete id="delete" parameterType="Integer">
         DELETE FROM propertyfee WHERE id=#{id}
     </delete>
+    <select id="findInhabitantById" resultType="nuc.edu.cn.demo.pojo.Inhabitant" parameterType="Integer">
+        SELECT * FROM cost,inhabitant WHERE propertyfee_id=#{id} AND inhabitant.id=cost.inhabitant_id
+    </select>
+    <select id="findAllInhabitant" resultType="nuc.edu.cn.demo.pojo.InhabitantSon">
+        SELECT * FROM inhabitant
+    </select>
 </mapper>

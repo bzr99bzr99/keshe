@@ -1,11 +1,11 @@
 package nuc.edu.cn.demo.controller;
 
+import nuc.edu.cn.demo.mapper.PropertyfeeMapper;
 import nuc.edu.cn.demo.pojo.Inhabitant;
 import nuc.edu.cn.demo.service.InhabitantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,6 +18,8 @@ import java.util.List;
 public class InhabitantController {
     @Autowired
     InhabitantService inhabitantService;
+    @Autowired
+    PropertyfeeMapper propertyfeeMapper;
 
     /**
      * 返回到主页
@@ -193,14 +195,29 @@ public class InhabitantController {
 
     /**
      * 管理员查询一个住户信息
+     *
      * @param query
      * @param model
      * @return
      */
-    @RequestMapping("selectone")
-    public String selectone(String query,Model model) {
-        model.addAttribute("inhabitants",inhabitantService.likeInhabitantByName(query));
+    @RequestMapping("/selectone")
+    public String selectone(String query, Model model) {
+        model.addAttribute("inhabitants", inhabitantService.likeInhabitantByName(query));
         return "admin_inhabitants";
     }
 
+
+    /**
+     * 该id用户查看自己的未缴费记录
+     *
+     * @param session
+     * @param model
+     * @return
+     */
+    @RequestMapping("/findById")
+    public String findById(HttpSession session, Model model) {
+        Inhabitant inhabitant = (Inhabitant) session.getAttribute("user");
+        model.addAttribute("msgs", inhabitantService.findById(inhabitant.getId()));
+        return "money";
+    }
 }

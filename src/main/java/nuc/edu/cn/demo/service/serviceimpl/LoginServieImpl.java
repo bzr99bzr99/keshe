@@ -4,6 +4,7 @@ import nuc.edu.cn.demo.mapper.AdminMapper;
 import nuc.edu.cn.demo.mapper.InhabitantMapper;
 import nuc.edu.cn.demo.pojo.Admin;
 import nuc.edu.cn.demo.pojo.Inhabitant;
+import nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee;
 import nuc.edu.cn.demo.pojo.LoginError;
 import nuc.edu.cn.demo.service.LoginServie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,11 @@ public class LoginServieImpl implements LoginServie {
     @Override
     public Admin selectAdmin(int id) {
         return adminMapper.select(id);
+    }
+
+    @Override
+    public InhabitantAndPropertyfee count(int id) {
+        return inhabitantMapper.findById(id);
     }
 
 

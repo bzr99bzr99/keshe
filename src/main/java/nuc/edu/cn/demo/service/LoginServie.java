@@ -2,6 +2,7 @@ package nuc.edu.cn.demo.service;
 
 import nuc.edu.cn.demo.pojo.Admin;
 import nuc.edu.cn.demo.pojo.Inhabitant;
+import nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee;
 import nuc.edu.cn.demo.pojo.LoginError;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +14,6 @@ public interface LoginServie {
     public Inhabitant selectInhabitant(int id);//查询登陆者信息
 
     public Admin selectAdmin(int id);
+
+    public InhabitantAndPropertyfee count(int id);
 }

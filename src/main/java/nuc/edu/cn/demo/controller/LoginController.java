@@ -55,11 +55,18 @@ public class LoginController {
             //住户id
             session.setAttribute("id", loginServie.selectInhabitant(id).getId());
             session.setAttribute("user", loginServie.selectInhabitant(id));
+            session.setAttribute("count",loginServie.count(id).getPropertyfees().size());
+            session.setAttribute("warn",loginServie.count(id).getPropertyfees());
             model.setViewName("login_success");
         }
         return model;
     }
 
+    /**
+     * 退出
+     * @param session
+     * @return
+     */
     @RequestMapping("/exit")
     public String exit(HttpSession session) {
         session.removeAttribute("user");
@@ -68,6 +75,8 @@ public class LoginController {
         session.removeAttribute("user");
         session.removeAttribute("nowpage");
         session.removeAttribute("pagenum");
+        session.removeAttribute("count");
+        session.removeAttribute("warn");
         return "index";
     }
 }
