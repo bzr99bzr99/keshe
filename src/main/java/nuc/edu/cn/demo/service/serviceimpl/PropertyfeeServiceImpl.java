@@ -4,7 +4,6 @@ import nuc.edu.cn.demo.mapper.PropertyfeeMapper;
 import nuc.edu.cn.demo.pojo.Inhabitant;
 import nuc.edu.cn.demo.pojo.InhabitantSon;
 import nuc.edu.cn.demo.pojo.Propertyfee;
-import nuc.edu.cn.demo.service.InhabitantService;
 import nuc.edu.cn.demo.service.PropertyfeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

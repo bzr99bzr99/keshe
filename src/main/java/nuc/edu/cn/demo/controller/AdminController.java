@@ -3,6 +3,7 @@ package nuc.edu.cn.demo.controller;
 import nuc.edu.cn.demo.pojo.Admin;
 import nuc.edu.cn.demo.pojo.Inhabitant;
 import nuc.edu.cn.demo.service.AdminService;
+import nuc.edu.cn.demo.service.InhabitantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private InhabitantService inhabitantService;
 
     /**
      * 查看所有住户信息
@@ -80,8 +83,19 @@ public class AdminController {
         return adminService.update(admin);
     }
 
+    /**
+     * 返回管理员主页
+     *
+     * @return
+     */
     @RequestMapping("/toindex")
     public String toindex() {
         return "admin_success";
+    }
+
+    @RequestMapping("/insertInhabitant")
+    public String insertInhabitant(Inhabitant inhabitant) {
+        inhabitantService.insertInhabitant(inhabitant);
+        return "redirect:inhabitants";
     }
 }

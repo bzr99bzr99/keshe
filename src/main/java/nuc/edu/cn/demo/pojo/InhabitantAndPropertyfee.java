@@ -5,8 +5,17 @@ import java.util.List;
 public class InhabitantAndPropertyfee {
     private int inhabitantId;
     private String inhabitantName;
-    private List<Propertyfee> propertyfees;
+    private int count;
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    private List<Propertyfee> propertyfees;
 
 
     public int getInhabitantId() {

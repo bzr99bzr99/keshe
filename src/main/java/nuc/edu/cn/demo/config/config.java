@@ -13,7 +13,7 @@ public class config implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(handlerInter).addPathPatterns("/admin/**","/inhabitant/**").excludePathPatterns("/");
+        registry.addInterceptor(handlerInter).addPathPatterns("/admin/**","/inhabitant/**","/propertyfee/**").excludePathPatterns("/");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

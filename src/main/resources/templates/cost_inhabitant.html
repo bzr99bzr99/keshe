@@ -21,6 +21,9 @@
                 $("#iframe").contents().find("input[name='checkbox']").prop("checked",false);
             }
         }
+        function a2() {
+            $("#iframe").contents().find("#form").submit();
+        }
     </script>
 </head>
 <body>
@@ -76,7 +79,10 @@
 <div class="container">
     <div>
         <div class="text-left col-md-6"><input type="checkbox" id="checkall" onclick="a1()">全选</div>
-        <div class="text-right col-md-6"><button type="button" class="btn btn-primary btn-sm">修改</button></div>
+        <div class="text-right col-md-6">
+            <button type="button" class="btn btn-primary btn-sm" onclick="a2()">修改</button>
+            <a th:href="@{/propertyfee/selects}"><button type="button" class="btn btn-default btn-sm">返回</button></a>
+        </div>
     </div>
     <iframe th:src="@{/propertyfee/selectinhabitants(id=${propertyfee_id})}" width="1150" height="700" id="iframe"></iframe>
 </div>

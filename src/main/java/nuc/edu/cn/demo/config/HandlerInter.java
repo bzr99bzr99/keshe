@@ -12,7 +12,8 @@ public class HandlerInter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("user");
         if(user==null){
-            System.out.println("拦截");
+            request.setAttribute("power","没有权限，请先登录");
+            request.getRequestDispatcher("/").forward(request,response);
             return false;
         }else{
             return true;

@@ -1,6 +1,10 @@
 package nuc.edu.cn.demo.controller;
 
+import nuc.edu.cn.demo.mapper.CostMapper;
+import nuc.edu.cn.demo.pojo.Cost;
+import nuc.edu.cn.demo.pojo.InhabitantSon;
 import nuc.edu.cn.demo.pojo.Propertyfee;
+import nuc.edu.cn.demo.service.CostService;
 import nuc.edu.cn.demo.service.PropertyfeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/propertyfee")
@@ -15,6 +21,9 @@ import java.util.List;
 public class PropertyfeeController {
     @Autowired
     PropertyfeeService propertyfeeService;
+
+    @Autowired
+    CostService costService;
 
     /**
      * 查询所有的物业单信息并返回至物业表管理页面
@@ -66,9 +75,30 @@ public class PropertyfeeController {
      * 返回全部信息
      */
     @RequestMapping("/selectinhabitants")
-    public String selects(int id, Model model) {
+    public String selects(int id, Model model, HttpSession session) {
         //物业表服务处理数据
-        model.addAttribute("inhabitants",propertyfeeService.flagInhabitant(id));
+        session.setAttribute("inhabitants", propertyfeeService.flagInhabitant(id));
+        //返回处理的物业表id
+        model.addAttribute("pro_id", id);
         return "inhabitant_inform";
+    }
+
+    @RequestMapping("/addd")
+    @ResponseBody
+    public int[] addd(int[] checkbox, int propertyfee_id, HttpSession session) {
+        List<InhabitantSon> inhabitantSons = (List<InhabitantSon>) session.getAttribute("inhabitants");
+        int j = 0;
+        int count = checkbox.length;
+        for (int i = 0;i < inhabitantSons.size();i++){
+            if (j<count&&inhabitantSons.get(i).getId()==checkbox[j]){
+                if (inhabitantSons.get(i).getFlag()==0){
+                    costService.insert(checkbox[j],propertyfee_id);
+                }
+                j++;
+            }else if (inhabitantSons.get(i).getFlag()==1){
+                costService.delete(inhabitantSons.get(i).getId(),propertyfee_id);
+            }
+        }
+        return checkbox;
     }
 }

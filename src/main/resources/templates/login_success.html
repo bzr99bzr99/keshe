@@ -59,7 +59,7 @@
             <div class="">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{/inhabitant/inhabitants}">住户信息</a></li>
-                    <li><a th:href="@{/inhabitant/findById}">缴费信息 <span class="badge" th:text="${session.count}">4</span></a></li>
+                    <li><a th:href="@{/inhabitant/findById}">缴费信息 <span class="badge" th:text="${session.count}" th:if="${session.count!=null}">4</span></a></li>
                 </ul>
             </div>
             <div class="">
@@ -147,7 +147,7 @@
     </div><!-- /.modal -->
 </div>
 <div class="container">
-    <div th:each="warn:${session.warn}">
+    <div th:each="warn:${session.warn}" th:if="${session.warn!=null}">
         <div class="alert alert-warning">
             <a href="#" class="close" data-dismiss="alert">
                 &times;

@@ -85,8 +85,45 @@
                     <form class="form-inline text-center" action="/inhabitant/selectone" method="post">
                         <input type="text" placeholder="请输入查询住户的姓名" class="form-control" id="query" name="query">
                         <button type="submit" class="btn btn-primary">查询</button>
+                        <a data-toggle="modal" data-target="#myModal007"><button type="button" class="btn btn-info">添加住户</button></a>
                     </form>
                 </div>
+            </div>
+            <div class="modal fade" id="myModal007" tabindex="-1" role="dialog" aria-labelledby="myModalLabel007" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel007">添加用户信息</h4>
+                        </div>
+                        <form action="/admin/insertInhabitant" method="post">
+                        <div class="modal-body">
+                            <label>住户姓名：</label>
+                            <input type="text" class="form-control" name="name">
+                            <label>住户性别：</label>
+                            <input type="text" class="form-control" name="sex">
+                            <label>年龄：</label>
+                            <input type="text" class="form-control" name="age">
+                            <label>电话：</label>
+                            <input type="text" class="form-control" name="phone">
+                            <label>入住时间</label>
+                            <input type="date" class="form-control" name="indate">
+                            <label>单元号：</label>
+                            <input type="text" class="form-control" name="unit">
+                            <label>门牌号：</label>
+                            <input type="text" class="form-control" name="foorplate">
+                            <label>备注：</label>
+                            <input type="text" class="form-control" name="remark">
+                            <label>住户密码：</label>
+                            <input type="text" class="form-control" name="password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary">添加</button>
+                        </div>
+                        </form>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
             </div>
             <!-- Table -->
             <table class="table table-hover table-striped" id="table">

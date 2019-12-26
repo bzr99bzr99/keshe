@@ -1,14 +1,10 @@
 package nuc.edu.cn.demo.controller;
 
-import nuc.edu.cn.demo.mapper.AdminMapper;
-import nuc.edu.cn.demo.pojo.Admin;
+import nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee;
 import nuc.edu.cn.demo.pojo.LoginError;
 import nuc.edu.cn.demo.service.LoginServie;
-import nuc.edu.cn.demo.service.serviceimpl.LoginServieImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,8 +51,11 @@ public class LoginController {
             //住户id
             session.setAttribute("id", loginServie.selectInhabitant(id).getId());
             session.setAttribute("user", loginServie.selectInhabitant(id));
-            session.setAttribute("count",loginServie.count(id).getPropertyfees().size());
-            session.setAttribute("warn",loginServie.count(id).getPropertyfees());
+            InhabitantAndPropertyfee inhabitantAndPropertyfee= loginServie.count(id);
+            if(inhabitantAndPropertyfee.getCount()!=0){
+                session.setAttribute("count", inhabitantAndPropertyfee.getPropertyfees().size());
+                session.setAttribute("warn", inhabitantAndPropertyfee.getPropertyfees());
+            }
             model.setViewName("login_success");
         }
         return model;
@@ -64,6 +63,7 @@ public class LoginController {
 
     /**
      * 退出
+     *
      * @param session
      * @return
      */
@@ -77,6 +77,7 @@ public class LoginController {
         session.removeAttribute("pagenum");
         session.removeAttribute("count");
         session.removeAttribute("warn");
+        session.removeAttribute("inhabitants");
         return "index";
     }
 }

@@ -12,6 +12,24 @@
     <link rel="stylesheet" th:href="@{css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{css/bootstrap-theme.css}">
     <script type="text/javascript">
+        function check() {
+            var id = $("#id").val();
+            var pwd = $("#pwd").val();
+            var attribute = $("input[name='attribute']:checked").val();
+            if(id==""){
+                alert("账号不能为空！")
+                return;
+            }
+            if(pwd==""){
+                alert("密码不能为空")
+                return;
+            }
+            if(attribute==null){
+                alert("请选择登录属性！")
+                return;
+            }
+            a1();
+        }
         function a1() {
             var id = $("#id").val();
             var pwd = $("#pwd").val();
@@ -77,6 +95,7 @@
     <div class="text-center">
         <form id="lform" method="post" action="/login/loginsuccess">
             <div class="form-group form-inline">
+                <div> <span th:text="${power}" th:if="${power!=null}" class="text-danger"></span></div>
                 <div id="div-id" class="input-group has-feedback">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span>账号 </span>
                     <input class="form-control" type="text" id="id" placeholder="请输入账号" name="id">
@@ -98,7 +117,7 @@
                 <input type="radio" name="attribute" value="1">管理员
             </div>
             <div class="form-group">
-                <button id="button" class="btn btn-default" type="button" onclick="a1()">登录</button>
+                <button id="button" class="btn btn-default" type="button" onclick="check()">登录</button>
             </div>
         </form>
     </div>

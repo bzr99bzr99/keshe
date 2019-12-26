@@ -35,6 +35,7 @@
     <resultMap id="one" type="nuc.edu.cn.demo.pojo.InhabitantAndPropertyfee">
         <id column="inhabitantId" property="inhabitantId"></id>
         <result column="inhabitantName" property="inhabitantName"></result>
+        <result column="count" property="count"></result>
         <collection property="propertyfees" ofType="nuc.edu.cn.demo.pojo.Propertyfee">
             <id column="propertyfeeId" property="id"></id>
             <result column="propertyfeeName" property="name"></result>
@@ -45,6 +46,6 @@
         </collection>
     </resultMap>
     <select id="findById" parameterType="Integer" resultMap="one">
-       SELECT inhabitant.id inhabitantId,inhabitant.name inhabitantName,propertyfee.id propertyfeeId,propertyfee.name propertyfeeName,propertyfee.describe,propertyfee.begindate,propertyfee.enddate,propertyfee.cost FROM inhabitant,propertyfee,cost WHERE inhabitant.id=cost.inhabitant_id AND cost.propertyfee_id=propertyfee.id AND inhabitant.id=#{id}
+       SELECT count(*) count,inhabitant.id inhabitantId,inhabitant.name inhabitantName,propertyfee.id propertyfeeId,propertyfee.name propertyfeeName,propertyfee.describe,propertyfee.begindate,propertyfee.enddate,propertyfee.cost FROM inhabitant,propertyfee,cost WHERE inhabitant.id=cost.inhabitant_id AND cost.propertyfee_id=propertyfee.id AND inhabitant.id=#{id}
     </select>
 </mapper>

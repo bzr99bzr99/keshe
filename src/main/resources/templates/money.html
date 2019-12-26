@@ -59,7 +59,7 @@
             <div class="">
                 <ul class="nav navbar-nav">
                     <li><a href="custom.html">住户信息</a></li>
-                    <li class="active"><a th:href="@{/inhabitant/findById}">缴费信息 <span class="badge" th:text="${session.count}">4</span></a></li>
+                    <li class="active"><a th:href="@{/inhabitant/findById}">缴费信息 <span class="badge" th:text="${session.count}" th:if="${session.count!=null}">4</span></a></li>
                 </ul>
             </div>
             <div class="">
@@ -149,6 +149,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+    <div><h3 class="text-center text-success" th:if="${session.count==null}">无待缴费用</h3></div>
     <div th:if="${msgs!=null}" th:each="p:${msgs.propertyfees}">
         <div class="panel panel-default">
             <div class="panel-heading">
